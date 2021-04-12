@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  RED.nodes.registerType("math-operation", {
+    category: "function",
+    color: "#f85858",
+    defaults: {
+      name: { value: "" },
+      number: { value: "" },
+      operation: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "fa",
+    oneditprepare: function () {
+      for (let i = 0; i < operations.length; i++) {
+        let value = operations[i].v;
+        let text = operations[i].t;
+        $("#node-input-operation").append(
+          $("<option></option>").attr("value", value).text(text)
+        );
+      }
+      $("#node-input-operation").val(this.operation);
+    },
+    label: function () {
+      let operationText = "";
+
+      for (let i = 0; i < operations.length; i++) {
+        if (operations[i].v === this.operation) {
+          operationText = operations[i].t;
+          break;
+        }
+      }
+
+      return this.name || "Math-Operation";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="math-operation">
+  <div class="form-row">
+    <label for="node-input-number">Number</label>
+    <input type="text" id="node-input-number" placeholder="Number" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-operation"
+      ><i class="fa fa-calculator"></i> Operation</label
+    >
+    <select id="node-input-operation"></select>
+  </div>
+
+  <br />
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+<script type="text/javascript">
+  let operations = [
+    { v: "sum", t: "Sum" },
+    { v: "sub", t: "Substract" },
+    { v: "div", t: "Divide" },
+    { v: "mult", t: "Multiply" },
+  ];
+</script>
