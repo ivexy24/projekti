@@ -4,48 +4,71 @@
     color: "#f85858",
     defaults: {
       name: { value: "" },
-      number: { value: "" },
-      operation: { value: "" },
+      options: { value: "" },
     },
     inputs: 1,
     outputs: 1,
     icon: "fa",
     oneditprepare: function () {
-      for (let i = 0; i < operations.length; i++) {
-        let value = operations[i].v;
-        let text = operations[i].t;
-        $("#node-input-operation").append(
-          $("<option></option>").attr("value", value).text(text)
-        );
-      }
-      $("#node-input-operation").val(this.operation);
+      $("#node-input-options").val(this.options);
+      let options = [];
+
+      // const fetchURL = () => {
+      //   const url = "";
+
+      //   fetch(url)
+      //     .then((res) => res.json())
+      //     .then((data) => {
+      //       data.forEach((item) => {
+      //         if (item.name.length < 40) {
+      //           options.push({
+      //             v: `${item.value}`,
+      //             t: item.name,
+      //           });
+      //         } else {
+      //           options.push({
+      //             v: `${item.value}`,
+      //             t: item.name,
+      //           });
+      //         }
+      //       });
+      //       for (let i = 0; i < options.length; i++) {
+      //         let value = options[i].v;
+      //         let text = options[i].t;
+      //         $("#node-input-options").append(
+      //           $("<option></option>").attr("value", value).text(text) //For every element in the select tag append appropriate value and text (   <option value="#">#</option>    )
+      //         );
+      //       }
+      //     });
+      // };
     },
     label: function () {
-      let operationText = "";
+      let options = this.options;
+      let optionText = "";
 
-      for (let i = 0; i < operations.length; i++) {
-        if (operations[i].v === this.operation) {
-          operationText = operations[i].t;
-          break;
-        }
-      }
-
-      return this.name || "Math-Operation";
+      // for (let i = 0; i < options.length; i++) {
+      //   if (options[i].v === this.options) {
+      //     optionText = options[i].t;
+      //     break;
+      //   }
+      // }
+      return this.name || "Custom Select";
     },
   });
 </script>
 
 <script type="text/html" data-template-name="math-operation">
-  <div class="form-row">
-    <label for="node-input-number">Number</label>
-    <input type="text" id="node-input-number" placeholder="Number" />
-  </div>
-
-  <div class="form-row">
-    <label for="node-input-operation"
-      ><i class="fa fa-calculator"></i> Operation</label
-    >
-    <select id="node-input-operation"></select>
+  <div style="width: 100%;" class="form-row">
+    <label style="width: 30%;"" for="node-input-options">Select Datapoint</label>
+    <select style="width: 60%;" id="node-input-options">
+      <option value="" selected>Select Datapoint</option>
+      <!-- <option value="one">Lead Pump Selection</option>
+      <option value="two">Pump 1 DPT Pressure</option>
+      <option value="three">System Command Run</option> -->
+      <option value="ZHT0062_2.System.LeadPump.Selection">Lead Pump Selection</option>
+      <option value="ZHT0062_2.Pump.1.DPT.Pressure">Pump 1 DPT Pressure</option>
+      <option value="ZHT0062_1.System.Command.Run">System Command Run</option>
+    </select>
   </div>
 
   <br />
@@ -54,11 +77,4 @@
     <input type="text" id="node-input-name" placeholder="Name" />
   </div>
 </script>
-<script type="text/javascript">
-  let operations = [
-    { v: "sum", t: "Sum" },
-    { v: "sub", t: "Substract" },
-    { v: "div", t: "Divide" },
-    { v: "mult", t: "Multiply" },
-  ];
-</script>
+<script type="text/javascript"></script>
